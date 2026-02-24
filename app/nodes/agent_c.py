@@ -4,8 +4,8 @@ from langchain_core.output_parsers import StrOutputParser
 from app.prompts.prompt_agent import get_agent_prompt
 
 llm=get_llm()
-def agent_a(state:ReportState):
-    question=state['sub_questions'][0]
+def agent_c(state:ReportState):
+    question=state['sub_questions'][2]
     prompt = get_agent_prompt()
     chain=prompt | llm| StrOutputParser()
     response=chain.invoke({'question':question})
@@ -14,3 +14,4 @@ def agent_a(state:ReportState):
     return {
             "answers": [{question: response}]
         }
+

@@ -3,13 +3,24 @@ from langgraph.graph import StateGraph, END
 from app.graph.state import ReportState
 from app.nodes.decomposer import decomposer_node
 from app.nodes.agent_a import agent_a
+from app.nodes.agent_b import agent_b
+from app.nodes.agent_c import agent_c
 
 
 def build_graph():
     graph = StateGraph(ReportState)
     graph.add_node("decomposer", decomposer_node)
     graph.add_node("agent_a", agent_a)
+    graph.add_node("agent_b", agent_b)
+    graph.add_node("agent_c", agent_c)
+    
     graph.set_entry_point("decomposer") 
     graph.add_edge("decomposer", "agent_a")
+    graph.add_edge("decomposer", "agent_b")
+    graph.add_edge("decomposer", "agent_c")
+  
     graph.add_edge("agent_a", END)
+    graph.add_edge("agent_b", END)
+    graph.add_edge("agent_c", END)
+
     return graph.compile()

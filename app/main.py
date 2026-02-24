@@ -8,7 +8,7 @@ def main():
     initial_state = {
         "topic": topic,
         "sub_questions": [],
-        "answers": {},
+        "answers": [],
         "retry_counts": {},
         "needs_retry": [],
         "final_report": None,
