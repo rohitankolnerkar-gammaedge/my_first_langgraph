@@ -1,4 +1,5 @@
 from app.graph.builder import build_graph
+from pprint import pprint  
 
 def main():
     graph = build_graph()
@@ -16,8 +17,15 @@ def main():
 
     result = graph.invoke(initial_state)
 
-    print("\nFinal State:")
-    print(result)
+  
+    print("\n===== FINAL STATE =====\n")
+    pprint(result)
+
+    print("\n===== FINAL REPORT =====\n")
+    if result.get("final_report"):
+        print(result["final_report"])
+    else:
+        print("No final report generated yet.")
 
 
 if __name__ == "__main__":

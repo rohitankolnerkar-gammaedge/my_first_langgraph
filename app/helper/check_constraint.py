@@ -5,8 +5,10 @@ vague_phrases = [
     "various factors",
 ]
 def  check_constraint(ans):
-    if len(ans)<50:
+    if len(ans)<10:
         return False
-    if any(vague in ans.lower() for vague in vague_phrases):
+    elif any(vague in ans.lower() for vague in vague_phrases):
         return False
+    else:
+        return True
     

@@ -12,5 +12,6 @@ def agent_a(state:ReportState):
     
 
     return {
-            "answers": [{question: response}]
+            "answers": [{question: response}],
+            "question_agent_map":{question:agent_a}
         }
