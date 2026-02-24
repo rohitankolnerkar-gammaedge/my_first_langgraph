@@ -26,8 +26,7 @@ def build_graph():
     graph.add_edge("agent_a", 'join')
     graph.add_edge("agent_b", 'join')
     graph.add_edge("agent_c", 'join')
-    graph.add_edge("join", "retry")
-    graph.add_edge("retry", "join")
+   
     graph.add_edge("join", END)
 
 

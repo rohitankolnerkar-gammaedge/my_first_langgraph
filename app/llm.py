@@ -5,8 +5,8 @@ from langchain_community.chat_models import ChatOllama
 def get_llm(
     temperature: float = 0,
     max_tokens: int = 256,
-    model_name: str = "phi",):
-    
+    model_name: str = "tinyllama",):
+
     return ChatOllama(
         model=model_name,
         temperature=temperature,

@@ -1,6 +1,6 @@
 from app.helper.check_constraint import check_constraint
-
-def join_node(state):
+from app.graph.state import ReportState
+def join_node(state:ReportState):
     merged_dict = {}
     merged_text = ""
     needs_retry = []
