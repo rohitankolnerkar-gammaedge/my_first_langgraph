@@ -15,24 +15,24 @@ def retry(state: ReportState):
 
     for failed_question in state["needs_retry"]:
 
-        # Increase retry count
+       
         current_count = updated_retry_counts.get(failed_question, 0) + 1
         updated_retry_counts[failed_question] = current_count
 
-        # Stop retrying if limit exceeded
+        
         if current_count > 2:
             print(f"Skipping {failed_question}, retry limit exceeded")
             continue
 
-        # Get agent safely
+        
         agent = state["question_agent_map"].get(failed_question)
         if not agent:
             continue
 
-        # Call agent
+        
         corrected_ans = agent(state)
 
-        # Replace old answer safely
+        
         if corrected_ans and corrected_ans.get("answers"):
             new_answer_dict = corrected_ans["answers"][0]
 

@@ -1,7 +1,8 @@
+import asyncio
 from app.graph.builder import build_graph
 
 
-def main():
+async def main():
     graph = build_graph()
 
     topic = input("Enter your research topic: ")
@@ -10,15 +11,14 @@ def main():
         "topic": topic,
         "sub_questions": [],
         "answers": [],
-        "question_agent_map":{},
+        "question_agent_map": {},
         "retry_counts": {},
         "needs_retry": [],
         "final_report": None,
     }
 
-    result = graph.invoke(initial_state)
+    result = await graph.ainvoke(initial_state)
 
-  
     print("\n===== FINAL STATE =====\n")
     print(result)
 
@@ -30,4 +30,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

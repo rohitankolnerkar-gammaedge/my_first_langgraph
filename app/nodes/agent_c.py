@@ -3,16 +3,25 @@ from app.graph.state import ReportState
 from langchain_core.output_parsers import StrOutputParser
 from app.prompts.prompt_agent import get_agent_prompt
 
-llm=get_llm()
-def agent_c(state:ReportState):
-    question=state['sub_questions'][2]
+llm = get_llm()
+
+async def agent_c(state: ReportState):
+    question = state['sub_questions'][2]
     prompt = get_agent_prompt()
-    chain=prompt | llm| StrOutputParser()
-    response=chain.invoke({'question':question})
-    
+    chain = prompt | llm | StrOutputParser()
+
+    print("\n\n Agent C generating answer:\n")
+    print(f"\n{question}\n")
+
+    response = ""
+
+    async for chunk in chain.astream({'question': question}):
+        print(chunk, end="", flush=True)  
+        response += chunk
+
+    print("\n\n Agent C finished.\n")
 
     return {
-            "answers": [{question: response}],
-            "question_agent_map":{question:agent_c}
-        }
-
+        "answers": [{question: response}],
+        "question_agent_map": {question: agent_c}
+    }
