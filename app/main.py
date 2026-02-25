@@ -1,5 +1,5 @@
 from app.graph.builder import build_graph
-from pprint import pprint  
+
 
 def main():
     graph = build_graph()
@@ -10,6 +10,7 @@ def main():
         "topic": topic,
         "sub_questions": [],
         "answers": [],
+        "question_agent_map":{},
         "retry_counts": {},
         "needs_retry": [],
         "final_report": None,
@@ -19,7 +20,7 @@ def main():
 
   
     print("\n===== FINAL STATE =====\n")
-    pprint(result)
+    print(result)
 
     print("\n===== FINAL REPORT =====\n")
     if result.get("final_report"):
