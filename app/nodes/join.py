@@ -2,8 +2,8 @@ from app.helper.check_constraint import check_constraint
 from app.llm import get_llm
 from app.prompts.prompt_summary import get_summary_prompt
 from langchain_core.output_parsers import StrOutputParser
-
-
+from app.helper.guardrails import output_guardrails
+out=output_guardrails()
 async def join_node(state):
     merged_dict = {}
     merged_text = ""
@@ -27,7 +27,7 @@ async def join_node(state):
         }
 
     
-    llm = get_llm()
+    llm = get_llm(max_tokens=1024)
     prompt =get_summary_prompt()   
     chain = prompt | llm | StrOutputParser()
 
@@ -38,8 +38,10 @@ async def join_node(state):
     async for chunk in chain.astream({"content": merged_text}):
         print(chunk, end="", flush=True)
         final_report += chunk
-
-    print("\n\n Final Summary Completed.\n")
+    if not  (out.validate_length(final_report) and out.validate_structure(final_report)):
+        print("summary not fulfill condition")
+    else:
+        print("\n\n Final Summary Completed.\n")
 
     return {
         "merged_answers": merged_dict,

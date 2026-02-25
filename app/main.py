@@ -1,11 +1,14 @@
 import asyncio
 from app.graph.builder import build_graph
-
+from app.helper.guardrails import validate_topic
 
 async def main():
     graph = build_graph()
 
     topic = input("Enter your research topic: ")
+    if not validate_topic(topic):
+        print("enter a valid topic")
+        return 
 
     initial_state = {
         "topic": topic,
